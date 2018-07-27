@@ -33,7 +33,7 @@ spec:
       - env:
         - name: EQ_API
           value: "http://api-earthquakes.default.svc.cluster.local/api/earthquakes"
-        image: chzbrgr71/quakes-ui:new1
+        image: chzbrgr71/quakes-ui:new2
         imagePullPolicy: Always
         name: quakes-ui
         ports:

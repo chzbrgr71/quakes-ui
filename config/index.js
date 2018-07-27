@@ -14,7 +14,7 @@ module.exports = {
     // Lets look at ENV / Secrets for these URLS below
     proxyTable: {
       '/api/quakes': {
-        target: 'http://gateway.brianredmond.io/api/earthquakes',
+        target: 'http://api-earthquakes.default.svc.cluster.local/api/earthquakes',
         changeOrigin: true,
         pathRewrite: {
           '^/api/quakes': ''
