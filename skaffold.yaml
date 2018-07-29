@@ -1,0 +1,14 @@
+apiVersion: skaffold/v1alpha2
+kind: Config
+build:
+  artifacts:
+  - imageName: gcr.io/skilful-orb-210513/quakes-ui
+deploy:
+  kubectl:
+    manifests:
+      - quakes-ui.yaml
+profiles:
+  - name: gcb
+    build:
+      googleCloudBuild:
+        projectId: skilful-orb-210513

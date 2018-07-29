@@ -1,5 +1,5 @@
 <template>
-  <v-app id="oss-japan" dark>
+  <v-app id="brian-redmond" dark>
     <v-navigation-drawer
       v-model="drawer"
       clipped
@@ -43,7 +43,7 @@
     </v-navigation-drawer>
     <v-toolbar app fixed clipped-left>
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-      <v-toolbar-title class="hidden-sm-and-down">LinuxCon, ContainerCon, CloudOpen 2018 China</v-toolbar-title>
+      <v-toolbar-title class="hidden-sm-and-down">GeoJSON Demo App v2</v-toolbar-title>
       <v-spacer></v-spacer>
         <v-avatar size="22" tile>
           <img

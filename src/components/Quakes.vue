@@ -127,7 +127,7 @@ export default {
       let payload
 
       // local proxy to middleware (see /config/index.js proxyTable)
-      const myRequest = new Request('http://api-earthquakes.default.svc.cluster.local/api/earthquakes')
+      const myRequest = new Request('http://api-earthquakes:8001/api/earthquakes')
 
       fetch(myRequest)
       .then((response) => { 
