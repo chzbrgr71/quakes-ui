@@ -3,6 +3,8 @@ kind: Config
 build:
   artifacts:
   - imageName: gcr.io/skilful-orb-210513/quakes-ui
+  googleCloudBuild:
+    projectId: skilful-orb-210513
 deploy:
   kubectl:
     manifests:
@@ -12,3 +14,13 @@ profiles:
     build:
       googleCloudBuild:
         projectId: skilful-orb-210513
+  - name: kaniko
+    build:
+      kaniko:
+        gcsBucket: k8s-skaffold
+        pullSecret: /a/secret/path/serviceaccount.json
+        namespace: default
+  - name: local
+    build:
+      local:
+        skipPush: true

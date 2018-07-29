@@ -129,10 +129,10 @@ export default {
       // local proxy to middleware (see /config/index.js proxyTable)
       //const myRequest = new Request('http://api-earthquakes:8001/api/earthquakes')
       //const myRequest = new Request('http://localhost:8080/api/earthquakes')
-      const myRequest = new Request('/api/earthquakes')
+      const myRequest = new Request('/api/quakes')
 
-      fetch(myRequest,{headers : { 'Content-Type': 'application/json','Accept': 'application/json'}})
-      //fetch(myRequest)
+      //fetch(myRequest,{headers : { 'Content-Type': 'application/json','Accept': 'application/json'}})
+      fetch(myRequest)
       .then((response) => { 
         return response.json() })
       .then((data) => {
