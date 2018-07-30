@@ -13,4 +13,14 @@ steps:
   - 'SLACK_CHANNEL=general'
   - 'SLACK_MESSAGE=cloud build complete'
   - 'SLACK_USERNAME=GCB'
+- name: 'gcr.io/cloud-builders/kubectl'
+  args:
+  - set
+  - image
+  - deployment
+  - quakes-ui
+  - quakes-ui=gcr.io/skilful-orb-210513/quakes-ui:$BUILD_ID
+  env:
+  - 'CLOUDSDK_COMPUTE_ZONE=us-east1-b'
+  - 'CLOUDSDK_CONTAINER_CLUSTER=briar-gke-1000'
 images: ['gcr.io/skilful-orb-210513/quakes-ui:$BUILD_ID']
