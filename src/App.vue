@@ -7,22 +7,6 @@
       app
     >
       <v-list>
-        <v-list-tile :to="{path: '/flights'}">
-          <v-list-tile-action>
-            <v-icon medium>flight</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title>Flights</v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
-        <v-list-tile :to="{path: '/fracking'}">
-          <v-list-tile-action>
-            <v-icon medium>play_for_work</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title>Fracking</v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
         <v-list-tile :to="{path: '/quakes'}">
           <v-list-tile-action>
             <v-icon medium>leak_add</v-icon>
@@ -31,19 +15,11 @@
             <v-list-tile-title>Earthquakes</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-        <v-list-tile :to="{path: '/weather'}">
-          <v-list-tile-action>
-            <v-icon medium>ac_unit</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title>Weather</v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
       </v-list>
     </v-navigation-drawer>
     <v-toolbar app fixed clipped-left>
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-      <v-toolbar-title class="hidden-sm-and-down">GeoJSON Demo App v2</v-toolbar-title>
+      <v-toolbar-title class="hidden-sm-and-down">Recent Earthquake Vizualization</v-toolbar-title>
       <v-spacer></v-spacer>
         <v-avatar size="22" tile>
           <img
@@ -67,7 +43,7 @@
           &copy;2018 <img
             src="static/images/msft_logo_sm.png"
             alt="Microsoft" height="14px"
-          > Intelligent Cloud Global Blackbelt Team
+          > Azure Global Blackbelt Team
         </v-flex>
       </v-layout>
     </v-footer>

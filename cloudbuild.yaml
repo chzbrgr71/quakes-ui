@@ -1,0 +1,15 @@
+steps:
+- name: 'technosophos/slack-notify:latest'
+  env:
+  - 'SLACK_WEBHOOK=https://hooks.slack.com/services/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'
+  - 'SLACK_CHANNEL=general'
+  - 'SLACK_MESSAGE=Google Cloud Builder starting build for quakes-ui to GCR'
+  - 'SLACK_USERNAME=GCB'
+- name: 'gcr.io/cloud-builders/docker'
+  args: [ 'build', '-t', 'gcr.io/skilful-orb-210513/quakes-ui:$BUILD_ID', '.' ]
+- name: 'technosophos/slack-notify:latest'
+  env:
+  - 'SLACK_WEBHOOK=https://hooks.slack.com/services/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'
+  - 'SLACK_CHANNEL=general'
+  - 'SLACK_MESSAGE=cloud build complete'
+  - 'SLACK_USERNAME=GCB'

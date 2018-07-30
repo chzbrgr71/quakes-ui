@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: quakes-ui
+  labels:
+    name: quakes-ui
+spec:
+  type: LoadBalancer
+  ports:
+  - name: http
+    port: 8080
+    targetPort: 8080
+  selector:
+    app: quakes-ui
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: quakes-ui
+  labels:
+    app: quakes-ui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: quakes-ui
+  template:
+    metadata:
+      labels:
+        app: quakes-ui
+    spec:
+      containers:
+      - env:
+        - name: EQ_API
+          value: "http://api-earthquakes:8001/api/earthquakes"
+        image: docker.io/chzbrgr71/quakes-ui
+        imagePullPolicy: Always
+        name: quakes-ui
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+      restartPolicy: Always

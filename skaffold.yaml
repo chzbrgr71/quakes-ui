@@ -10,10 +10,17 @@ deploy:
     manifests:
       - quakes-ui.yaml
 profiles:
-  - name: gcb
+  - name: acr
     build:
-      googleCloudBuild:
-        projectId: skilful-orb-210513
+      artifacts:
+        - imageName: briaracr.azurecr.io/chzbrgr71/quakes-ui
+      local:
+      tagPolicy:
+        gitCommit: {}
+    deploy:
+      kubectl:
+        manifests:
+          - quakes-ui-qa.yaml
   - name: kaniko
     build:
       kaniko:
@@ -22,5 +29,12 @@ profiles:
         namespace: default
   - name: local
     build:
+      artifacts:
+        - imageName: docker.io/chzbrgr71/quakes-ui
       local:
-        skipPush: true
+      tagPolicy:
+        gitCommit: {}
+    deploy:
+      kubectl:
+        manifests:
+          - quakes-ui-dev.yaml
