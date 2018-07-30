@@ -13,3 +13,4 @@ steps:
   - 'SLACK_CHANNEL=general'
   - 'SLACK_MESSAGE=cloud build complete'
   - 'SLACK_USERNAME=GCB'
+images: ['gcr.io/skilful-orb-210513/quakes-ui:$BUILD_ID']
