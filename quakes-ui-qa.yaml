@@ -33,10 +33,103 @@ spec:
       - env:
         - name: EQ_API
           value: "http://api-earthquakes:8001/api/earthquakes"
-        image: briaracr.azurecr.io/chzbrgr71/quakes-ui
+        - name: KUBE_NODE_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+        image: gcr.io/skilful-orb-210513/quakes-ui
         imagePullPolicy: Always
         name: quakes-ui
         ports:
         - containerPort: 8080
+          protocol: TCP
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: api-location
+  labels:
+    name: api-location
+spec:
+  type: ClusterIP
+  ports:
+  - name: http
+    port: 8000
+    targetPort: 8000
+  selector:
+    app: api-location
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-location
+  labels:
+    app: api-location
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api-location
+  template:
+    metadata:
+      labels:
+        app: api-location
+        version: prod
+    spec:
+      containers:
+        - image: chzbrgr71/api-location:2.0
+          imagePullPolicy: Always
+          name: api-location
+          ports:
+          - containerPort: 8000
+            protocol: TCP
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: api-earthquakes
+  labels:
+    name: api-earthquakes
+spec:
+  type: ClusterIP
+  ports:
+  - name: http
+    port: 8001
+    targetPort: 8001
+  selector:
+    app: api-earthquakes
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-earthquakes
+  labels:
+    app: api-earthquakes
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api-earthquakes
+  template:
+    metadata:
+      labels:
+        app: api-earthquakes
+    spec:
+      containers:
+      - env:
+        - name: LOC_API
+          value: "api-location.default.svc.cluster.local:8000"
+        - name: MONGODB_URI
+          valueFrom:
+            secretKeyRef:
+              name: cosmos-db-secret
+              key: uri
+        image: chzbrgr71/api-earthquakes:2.0
+        imagePullPolicy: Always
+        name: api-earthquakes
+        ports:
+        - containerPort: 8001
           protocol: TCP
       restartPolicy: Always

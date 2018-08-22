@@ -2,39 +2,11 @@ apiVersion: skaffold/v1alpha2
 kind: Config
 build:
   artifacts:
-  - imageName: gcr.io/skilful-orb-210513/quakes-ui
-  googleCloudBuild:
-    projectId: skilful-orb-210513
+  - imageName: chzbrgr71/quakes-ui
+    docker: {}
+  local:
+    skipPush: False
 deploy:
   kubectl:
     manifests:
-      - quakes-ui.yaml
-profiles:
-  - name: acr
-    build:
-      artifacts:
-        - imageName: briaracr.azurecr.io/chzbrgr71/quakes-ui
-      local:
-      tagPolicy:
-        gitCommit: {}
-    deploy:
-      kubectl:
-        manifests:
-          - quakes-ui-qa.yaml
-  - name: kaniko
-    build:
-      kaniko:
-        gcsBucket: k8s-skaffold
-        pullSecret: /a/secret/path/serviceaccount.json
-        namespace: default
-  - name: local
-    build:
-      artifacts:
-        - imageName: docker.io/chzbrgr71/quakes-ui
-      local:
-      tagPolicy:
-        gitCommit: {}
-    deploy:
-      kubectl:
-        manifests:
-          - quakes-ui-dev.yaml
+      - quakes-ui-dev.yaml

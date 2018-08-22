@@ -19,7 +19,7 @@
     </v-navigation-drawer>
     <v-toolbar app fixed clipped-left>
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-      <v-toolbar-title class="hidden-sm-and-down">Recent Earthquake Vizualization v2.95</v-toolbar-title>
+      <v-toolbar-title class="hidden-sm-and-down">Recent Earthquake Vizualization v3.10 ({{nodename}}) </v-toolbar-title>
       <v-spacer></v-spacer>
         <v-avatar size="22" tile>
           <img
@@ -56,12 +56,11 @@
 </style>
 
 <script>
-export default {
-  data: () => ({
-    drawer: true
-  }),
-  props: {
-    source: String
-  }
-}
+  export default {
+    data() {
+      return {
+        nodename: process.env.KUBE_NODE_NAME
+      };
+    }
+  };
 </script>
