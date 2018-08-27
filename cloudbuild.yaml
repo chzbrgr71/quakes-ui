@@ -22,5 +22,5 @@ steps:
   - quakes-ui=gcr.io/skilful-orb-210513/quakes-ui:$BUILD_ID
   env:
   - 'CLOUDSDK_COMPUTE_ZONE=us-east4-a'
-  - 'CLOUDSDK_CONTAINER_CLUSTER=briar-cluster-1'
+  - 'CLOUDSDK_CONTAINER_CLUSTER=prod-cluster-1'
 images: ['gcr.io/skilful-orb-210513/quakes-ui:$BUILD_ID']
